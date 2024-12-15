@@ -81,14 +81,16 @@ func parseData(dataLines *bufio.Scanner, id int) Email {
 		line := dataLines.Text()
 		data.ID = id
 
-		// Debug: imprimir la línea actual
-		fmt.Println("Processing line:", line)
+		// // Debug: imprimir la línea actual
+		// fmt.Println("Processing line:", line)
 
 		// Manejo de líneas continuadas (con espacios al inicio)
 		if strings.HasPrefix(line, " ") || strings.HasPrefix(line, "\t") {
 			if lastField != "" {
 				// concatenar al último campo detectado
 				switch lastField {
+				case "To:":
+					data.To += " " + strings.TrimSpace(line)
 				case "Cc:":
 					data.Cc += " " + strings.TrimSpace(line)
 				case "Bcc:":
@@ -117,8 +119,8 @@ func parseData(dataLines *bufio.Scanner, id int) Email {
 			data.Body += line + "\n"
 		}
 	}
-	// Debug: imprimir los datos parseados
-	fmt.Printf("Parsed data: %+v\n", data)
+	// // Debug: imprimir los datos parseados
+	// fmt.Printf("Parsed data: %+v\n", data)
 	return data
 }
 
@@ -179,7 +181,7 @@ func createJson(data []string) {
 func IndexAndCreateJson() {
 	path := os.Getenv("DATA_PATH")
 	semaphore := make(chan struct{}, 8)
-	// var wg sync.WaitGroup
+
 	count := 0
 
 	fmt.Println("Indexando...")
@@ -215,6 +217,6 @@ func IndexAndCreateJson() {
 	log.Printf("Cantidad de datos indexados: %d", len(jsonEmailData)+1)
 	log.Println("Indexación completada. Todos los archivos han sido procesados.")
 	createJson(jsonEmailData)
-	fmt.Println("Indexing finished!!!!")
+	fmt.Println("Finished!!!!")
 
 }
