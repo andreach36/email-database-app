@@ -11,7 +11,6 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	// "sync"
 )
 
 var jsonEmailData []string
@@ -81,7 +80,7 @@ func parseData(dataLines *bufio.Scanner, id int) Email {
 		line := dataLines.Text()
 		data.ID = id
 
-		// // Debug: imprimir la línea actual
+		// Debug: imprimir la línea actual
 		// fmt.Println("Processing line:", line)
 
 		// Manejo de líneas continuadas (con espacios al inicio)
@@ -119,7 +118,7 @@ func parseData(dataLines *bufio.Scanner, id int) Email {
 			data.Body += line + "\n"
 		}
 	}
-	// // Debug: imprimir los datos parseados
+	// Debug: imprimir los datos parseados
 	// fmt.Printf("Parsed data: %+v\n", data)
 	return data
 }

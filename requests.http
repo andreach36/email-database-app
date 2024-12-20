@@ -1,0 +1,12 @@
+### List emails
+GET http://localhost:3000/emails?from=0&size=10
+Content-Type: application/json
+
+
+### Search emails by query=arnold
+GET http://localhost:3000/emails/search?q=arnold&from=0&size=10
+Content-Type: application/json
+
+### Search emails by query=vulcano
+GET http://localhost:3000/emails/search?q=vulcan&from=0&size=10
+Content-Type: application/json
